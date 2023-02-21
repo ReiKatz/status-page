@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+  
+  db:
+    image: postgres:latest
+    container_name: postgresql
+    environment:
+      POSTGRES_USER: statuspage
+      POSTGRES_PASSWORD: Aa123456123456
+      POSTGRES_DB: status-page
+    ports:
+      - "5432:5432"
+
+        #application:
+        #build: .
+        #container_name: app
+        #ports:
+        #- "8000:8000"
+        #environment:
+        #DATABASE_URL: postgresql://statuspage:Aa123456123456@postgres:5432/status-page
+        #REDIS_URL: redis://redis:6379/0
+
