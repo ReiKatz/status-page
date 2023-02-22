@@ -4,6 +4,7 @@ FROM python:3.10-alpine3.16
 # Set the working directory to /status-page
 WORKDIR /status-page
 
+# define the configuration file as a default argument to the build command
 ARG CONFIG_FILE=statuspage/statuspage/configuration.py
 COPY $CONFIG_FILE .
 
@@ -13,6 +14,13 @@ RUN apk add --no-cache build-base
 # Install any needed packages specified in requirements.txt
 COPY requirements.txt .
 RUN pip install -r requirements.txt
+
+# run the upgrade script
+RUN sudo upgrade.sh
+
+RUN source venv/bin/activate
+
+RUN cd statuspage && python3 manage.py createsuperuser
 
 # Expose port 8000 for the Django application
 EXPOSE 8000
