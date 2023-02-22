@@ -17,21 +17,30 @@ RUN adduser -S myuser && echo "myuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 USER myuser
 
+# Install extras package
+RUN pip install extras
+
 # Install any needed packages specified in requirements.txt
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
+# Copy the statuspage folder and the manage.py file
+COPY statuspage/ statuspage/
+COPY statuspage/manage.py .
+
 # run the upgrade script
 COPY upgrade.sh .
-RUN ls -l
-RUN sudo chmod +x upgrade.sh && sudo ./upgrade.sh
+RUN sudo chmod +x upgrade.sh 
+RUN sudo sh ./upgrade.sh
 
+# activate virtual environment
 RUN source venv/bin/activate
 
-RUN cd statuspage && python3 manage.py createsuperuser
+# create the superuser
+RUN python manage.py createsuperuser
 
 # Expose port 8000 for the Django application
 EXPOSE 8000
 
 # Start the Django application
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
