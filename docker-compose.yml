@@ -17,12 +17,15 @@ services:
     ports:
       - "5432:5432"
 
-        #application:
-        #build: .
-        #container_name: app
-        #ports:
-        #- "8000:8000"
-        #environment:
-        #DATABASE_URL: postgresql://statuspage:Aa123456123456@postgres:5432/status-page
-        #REDIS_URL: redis://redis:6379/0
+  application:
+    build: .
+    depends_on:
+      - db
+      - redis
+    container_name: app
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://statuspage:Aa123456123456@postgres:5432/status-page
+      REDIS_URL: redis://redis:6379/0
 
