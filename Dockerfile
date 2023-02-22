@@ -4,7 +4,7 @@ FROM python:3.10-alpine3.16
 # Set the working directory to /status-page
 WORKDIR /status-page
 
-ARG CONFIG_FILE=configuration.py
+ARG CONFIG_FILE=statuspage/statuspage/configuration.py
 COPY $CONFIG_FILE .
 
 RUN apk add --no-cache postgresql-dev
