@@ -11,6 +11,12 @@ COPY $CONFIG_FILE .
 RUN apk add --no-cache postgresql-dev
 RUN apk add --no-cache build-base
 
+RUN apk update && apk add sudo
+
+RUN adduser -S myuser && echo "myuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+USER myuser
+
 # Install any needed packages specified in requirements.txt
 COPY requirements.txt .
 RUN pip install -r requirements.txt
