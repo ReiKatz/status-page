@@ -22,7 +22,9 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # run the upgrade script
-RUN sudo upgrade.sh
+COPY upgrade.sh .
+RUN ls -l
+RUN sudo chmod +x upgrade.sh && sudo ./upgrade.sh
 
 RUN source venv/bin/activate
 
