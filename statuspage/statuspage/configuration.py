@@ -11,7 +11,7 @@ ALLOWED_HOSTS = ['*']
 # PostgreSQL database configuration. See the Django documentation for a complete list of available parameters:
 #   https://docs.djangoproject.com/en/stable/ref/settings/#databases
 DATABASE = {
-    'NAME': 'statuspage',         # Database name
+    'NAME': 'status-page',         # Database name
     'USER': 'statuspage',               # PostgreSQL username
     'PASSWORD': 'Aa123456123456',           # PostgreSQL password
     'HOST': 'localhost',      # Database server
@@ -57,7 +57,7 @@ SITE_URL = ""
 # For optimal security, SECRET_KEY should be at least 50 characters in length and contain a mix of letters, numbers, and
 # symbols. Status-Page will not run without this defined. For more information, see
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-SECRET_KEY
-SECRET_KEY = 'zEFLDEmM!m4-oes0MBjTe&Yjqn3PNpXJLo@H(C!vLj0#Xyxe2f'
+SECRET_KEY = '1hULffK-wk8LZqdJYSFuzNTPc0Pn*pfm&XYhV8Smukwe+#rqND'
 
 #
 # Optional Settings
