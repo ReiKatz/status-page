@@ -3,19 +3,28 @@ services:
   redis:
     image: redis:7.0.8-alpine
     container_name: redis
+    healthcheck:
+      test: "redis-cli ping"
+      interval: 1s
+      retries: 20
     ports:
       - "6379:6379"
   
   db:
     image: postgres
     container_name: postgresql
-    restart: always
+    restart: on-failure
     environment:
       POSTGRES_USER: statuspage
       POSTGRES_PASSWORD: Aa123456123456
       POSTGRES_DB: status-page
+    healthcheck:
+      test: "PGPASSWORD='Aa123456123456' psql -U statuspage -p 5432 -c 'SELECT 1' statuspage"
+      interval: 1s
+      retries: 20
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - /var/run/postgresql:/var/run/postgresql
     ports:
       - "5432:5432"
     command: >
@@ -26,8 +35,10 @@ services:
   application:
     build: .
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     container_name: app
     ports:
       - "8000:8000"
@@ -37,3 +48,4 @@ services:
 
 volumes:
   init.sql:
+  postgresql:
