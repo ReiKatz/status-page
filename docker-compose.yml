@@ -15,7 +15,7 @@ services:
       POSTGRES_PASSWORD: Aa123456123456
       POSTGRES_DB: status-page
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init.sql/db.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
 
@@ -31,4 +31,4 @@ services:
       DATABASE_URL: postgresql://statuspage:Aa123456123456@postgres:5432/status-page
       REDIS_URL: redis://redis:6379/0
 volumes:
-  init.sql:
+  db.sql:
