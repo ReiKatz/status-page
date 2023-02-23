@@ -4,10 +4,10 @@ services:
   db-redis:
     build: ./postgres-redis/
     container_name: postgresql-redis
-      #environment:
-      #POSTGRES_USER: statuspage
-        #POSTGRES_PASSWORD: Aa123456123456
-        #POSTGRES_DB: status-page
+    environment:
+      POSTGRES_USER: statuspage
+      POSTGRES_PASSWORD: Aa123456123456
+      POSTGRES_DB: status-page
     volumes:
       - ./init.sql/db.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
