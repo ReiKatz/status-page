@@ -3,6 +3,7 @@ services:
   redis:
     image: redis:7.0.8-alpine
     container_name: redis
+    restart: on-failure
     healthcheck:
       test: "redis-cli ping"
       interval: 1s
@@ -24,7 +25,7 @@ services:
       retries: 20
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      - /var/run/postgresql:/var/run/postgresql
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
     ports:
       - "5432:5432"
     command: >
@@ -40,6 +41,7 @@ services:
       redis:
         condition: service_healthy
     container_name: app
+    restart: on-failure
     ports:
       - "8000:8000"
     environment:
@@ -48,4 +50,4 @@ services:
 
 volumes:
   init.sql:
-  postgresql:
+  postgresql.conf:
