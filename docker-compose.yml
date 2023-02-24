@@ -16,7 +16,7 @@ services:
     container_name: postgresql
     restart: on-failure
     healthcheck:
-      test: "PGPASSWORD='Aa123456123456' psql -U statuspage -p 5432 -c 'SELECT 1' statuspage"
+      test: ["CMD", "pg_isready", "-U", "statuspage"]
       interval: 1s
       retries: 20
     environment:
