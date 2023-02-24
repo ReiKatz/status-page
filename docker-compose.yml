@@ -15,23 +15,19 @@ services:
     image: postgres
     container_name: postgresql
     restart: on-failure
-    environment:
-      POSTGRES_USER: statuspage
-      POSTGRES_PASSWORD: Aa123456123456
-      POSTGRES_DB: status-page
     healthcheck:
       test: "PGPASSWORD='Aa123456123456' psql -U statuspage -p 5432 -c 'SELECT 1' statuspage"
       interval: 1s
       retries: 20
+    environment:
+      POSTGRES_USER: "statuspage"
+      POSTGRES_PASSWORD: "Aa123456123456"
+      POSTGRES_DB: "statuspage"
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init.sql/db.sql:/docker-entrypoint-initdb.d/init.sql
       - ./postgresql.conf:/etc/postgresql/postgresql.conf
     ports:
       - "5432:5432"
-    command: >
-      bash -c "echo 'CREATE DATABASE status-page;' | psql -U postgres &&
-               echo \"CREATE USER statuspage WITH ENCRYPTED PASSWORD 'Aa123456123456';\" | psql -U postgres &&
-               echo 'GRANT ALL PRIVILEGES ON DATABASE mydb TO myuser;' | psql -U postgres"
 
   application:
     build: .
@@ -49,5 +45,5 @@ services:
       REDIS_URL: redis://redis:6379/0
 
 volumes:
-  init.sql:
+  db.sql:
   postgresql.conf:
