@@ -5,9 +5,10 @@ services:
     container_name: redis
     restart: on-failure
     healthcheck:
-      test: "redis-cli ping"
-      interval: 1s
-      retries: 20
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     ports:
       - "6379:6379"
   
@@ -16,9 +17,10 @@ services:
     container_name: postgresql
     restart: on-failure
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "statuspage"]
-      interval: 1s
-      retries: 20
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     environment:
       POSTGRES_USER: "statuspage"
       POSTGRES_PASSWORD: "Aa123456123456"
