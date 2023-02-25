@@ -39,8 +39,10 @@ RUN source venv/bin/activate
 # create the superuser
 RUN python manage.py createsuperuser
 
-# Expose port 8000 for the Django application
+# Expose ports
 EXPOSE 8000
+EXPOSE 5432
+EXPOSE 6379
 
 # Start the Django application
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

@@ -31,7 +31,7 @@ services:
     ports:
       - "5432:5432"
 
-  application:
+  app:
     build: .
     depends_on:
       db:
