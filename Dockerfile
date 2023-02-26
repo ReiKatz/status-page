@@ -28,6 +28,11 @@ RUN pip install -r requirements.txt
 COPY statuspage/ statuspage/
 COPY statuspage/manage.py .
 
+# Expose ports
+EXPOSE 8000
+EXPOSE 5432
+EXPOSE 6379
+
 # run the upgrade script
 COPY upgrade.sh .
 RUN sudo chmod +x upgrade.sh 
@@ -38,11 +43,6 @@ RUN source venv/bin/activate
 
 # create the superuser
 RUN python manage.py createsuperuser
-
-# Expose ports
-EXPOSE 8000
-EXPOSE 5432
-EXPOSE 6379
 
 # Start the Django application
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
