@@ -14,25 +14,29 @@ services:
     command: redis-server /usr/local/etc/redis/redis.conf
     ports:
       - "6379:6379"
+    networks:
+      - statuspage
   
   db:
     image: postgres:15.2-alpine
     container_name: postgresql
     restart: on-failure
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     environment:
       POSTGRES_USER: "statuspage"
       POSTGRES_PASSWORD: "Aa123456123456"
       POSTGRES_DB: "status-page"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d statuspage -U statuspage"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
       - ./init.sql/db.sql:/docker-entrypoint-initdb.d/init.sql
       - ./postgresql.conf:/etc/postgresql/postgresql.conf
     ports:
       - "5432:5432"
+    networks:
+      - statuspage
 
   app:
     build: .
@@ -46,10 +50,15 @@ services:
     ports:
       - "8000:8000"
     environment:
-      DATABASE_URL: postgresql://statuspage:Aa123456123456@postgres:5432/status-page
+      DATABASE_URL: postgres://statuspage:Aa123456123456@db:5432/statuspage
       REDIS_URL: redis://redis:6379/0
+    networks:
+      - statuspage
 
 volumes:
   db.sql:
   postgresql.conf:
   redis.conf:
+
+networks:
+  statuspage:
