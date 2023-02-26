@@ -1,48 +1,24 @@
 # Use an official Python runtime as a parent image
-FROM python:3.10-alpine3.16
+FROM python:3.10
 
 # Set the working directory to /status-page
 WORKDIR /status-page
 
-# define the configuration file as a default argument to the build command
-ARG CONFIG_FILE=statuspage/statuspage/configuration.py
-COPY $CONFIG_FILE .
-
-RUN apk add --no-cache postgresql-dev
-RUN apk add --no-cache build-base
-
-RUN apk update && apk add sudo
-
-RUN adduser -S myuser && echo "myuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-
-USER myuser
-
-# Install extras package
-RUN pip install extras
-
 # Install any needed packages specified in requirements.txt
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the statuspage folder and the manage.py file
-COPY statuspage/ statuspage/
-COPY statuspage/manage.py .
-
-# Expose ports
-EXPOSE 8000
-EXPOSE 5432
-EXPOSE 6379
+COPY statuspage/manage.py ./statuspage/
+COPY statuspage/statuspage/settings.py ./statuspage/
+COPY . .
 
 # run the upgrade script
-COPY upgrade.sh .
-RUN sudo chmod +x upgrade.sh 
-RUN sudo sh ./upgrade.sh
+RUN #apt-get update && \
+    bash ./upgrade.sh && \
+    python -m venv /venv && \
+    python ./statuspage/manage.py createsuperuser --no-input --username superuser
 
-# activate virtual environment
-RUN source venv/bin/activate
-
-# create the superuser
-RUN python manage.py createsuperuser
+EXPOSE 8000
 
 # Start the Django application
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "./statuspage/manage.py", "runserver", "0.0.0.0:8000"]

@@ -9,6 +9,9 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
     ports:
       - "6379:6379"
   
@@ -24,7 +27,7 @@ services:
     environment:
       POSTGRES_USER: "statuspage"
       POSTGRES_PASSWORD: "Aa123456123456"
-      POSTGRES_DB: "statuspage"
+      POSTGRES_DB: "status-page"
     volumes:
       - ./init.sql/db.sql:/docker-entrypoint-initdb.d/init.sql
       - ./postgresql.conf:/etc/postgresql/postgresql.conf
@@ -49,3 +52,4 @@ services:
 volumes:
   db.sql:
   postgresql.conf:
+  redis.conf:

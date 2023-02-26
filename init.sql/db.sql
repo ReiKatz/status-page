@@ -1,4 +1,4 @@
-CREATE DATABASE statuspage;
+CREATE DATABASE status-page;
 CREATE USER statuspage WITH PASSWORD 'Aa123456123456';
-GRANT ALL PRIVILEGES ON DATABASE statuspage TO statuspage;
+GRANT ALL PRIVILEGES ON DATABASE status-page TO statuspage;
 
