@@ -1,3 +1,8 @@
+import requests
+
+# Get the private IP address of the instance using the AWS metadata service
+private_ip_address = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4').text
+
 # Required Settings
 #
 
@@ -9,10 +14,10 @@ ALLOWED_HOSTS = ['*']
 
 # PostgreSQL database configuration. See the Django documentation for a complete list of available parameters:
 #   https://docs.djangoproject.com/en/stable/ref/settings/#databases
-DATABASE = {
     'NAME': 'statuspage',         # Database name
     'USER': 'statuspage',               # PostgreSQL username
     'PASSWORD': 'Aa123456123456',           # PostgreSQL password
+    'HOST': private_ip_address,      # Database server
     'HOST': '10.0.139.179',      # Database server
     'PORT': '5432',               # Database port (leave blank for default)
     'CONN_MAX_AGE': 300,      # Max database connection age
@@ -35,6 +40,7 @@ REDIS = {
         # 'INSECURE_SKIP_TLS_VERIFY': False,
     },
     'caching': {
+        'HOST': private_ip_address,
         'HOST': '10.0.139.179',
         'PORT': 6379,
         # Comment out `HOST` and `PORT` lines and uncomment the following if using Redis Sentinel
