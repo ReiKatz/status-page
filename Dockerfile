@@ -14,10 +14,10 @@ COPY . .
 
 # run the upgrade script
 RUN bash ./upgrade.sh && \
-    python -m venv /venv && \
-    python ./statuspage/manage.py createsuperuser --no-input --username superuser
+    python3 -m venv /venv && \
+    python3 ./statuspage/manage.py createsuperuser --no-input --email superuser@email.com --username superuser
 
 EXPOSE 8000
 
 # Start the Django application
-CMD ["python", "./statuspage/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python3", "./statuspage/manage.py", "runserver", "0.0.0.0:8000"]

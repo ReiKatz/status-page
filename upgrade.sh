@@ -104,7 +104,7 @@ echo "Removing expired user sessions ($COMMAND)..."
 eval $COMMAND || exit 1
 
 # Clear the cache
-COMMAND="python3 statuspage/manage.py clearcache"
+COMMAND="python3 statuspage/manage.py createcachetable"
 echo "Clearing the cache ($COMMAND)..."
 eval $COMMAND || exit 1
 

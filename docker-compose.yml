@@ -9,11 +9,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    volumes:
-      - ./redis.conf:/usr/local/etc/redis/redis.conf
-    command: redis-server /usr/local/etc/redis/redis.conf
-    ports:
-      - "6379:6379"
+    network_mode: "host"
   
   db:
     image: postgres:15.2-alpine
@@ -31,8 +27,7 @@ services:
     volumes:
       - ./init.sql/db.sql:/docker-entrypoint-initdb.d/init.sql
       - ./postgresql.conf:/etc/postgresql/postgresql.conf
-    ports:
-      - "5432:5432"
+    network_mode: "host"
 
   app:
     build: .
@@ -43,13 +38,11 @@ services:
         condition: service_healthy
     container_name: app
     restart: on-failure
-    ports:
-      - "8000:8000"
+    network_mode: "host"
     environment:
-      DATABASE_URL: db://statuspage:Aa123456123456@db:5432/statuspage
-      REDIS_URL: redis://redis:6379/0
+      DATABASE_URL: postgresql://statuspage:Aa123456123456@localhost:5432/statuspage
+      REDIS_URL: redis://localhost:6379/0
 
 volumes:
   db.sql:
   postgresql.conf:
-  redis.conf:
