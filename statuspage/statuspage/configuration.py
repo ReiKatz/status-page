@@ -18,7 +18,6 @@ ALLOWED_HOSTS = ['*']
     'USER': 'statuspage',               # PostgreSQL username
     'PASSWORD': 'Aa123456123456',           # PostgreSQL password
     'HOST': private_ip_address,      # Database server
-    'HOST': '10.0.139.179',      # Database server
     'PORT': '5432',               # Database port (leave blank for default)
     'CONN_MAX_AGE': 300,      # Max database connection age
 }
@@ -27,7 +26,7 @@ ALLOWED_HOSTS = ['*']
 # for each. Full connection details are required.
 REDIS = {
     'tasks': {
-        'HOST': '10.0.139.179',
+        'HOST': private_ip_address,
         'PORT': 6379,
         # Comment out `HOST` and `PORT` lines and uncomment the following if using Redis Sentinel
         # 'SENTINELS': [('mysentinel.redis.example.com', 6379)],
@@ -41,7 +40,6 @@ REDIS = {
     },
     'caching': {
         'HOST': private_ip_address,
-        'HOST': '10.0.139.179',
         'PORT': 6379,
         # Comment out `HOST` and `PORT` lines and uncomment the following if using Redis Sentinel
         # 'SENTINELS': [('mysentinel.redis.example.com', 6379)],
