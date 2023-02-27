@@ -14,7 +14,11 @@ DATABASE = {
     'NAME': 'statuspage',         # Database name
     'USER': 'statuspage',               # PostgreSQL username
     'PASSWORD': 'Aa123456123456',           # PostgreSQL password
-    'HOST': '${PRIV_IP}',      # Database server
+<<<<<<< HEAD
+    'HOST': '10.0.18.29',      # Database server
+=======
+    'HOST': '10.0.18.29',      # Database server
+>>>>>>> 7ae6cf6b55e6e1b2647b68774d548985ddd0049e
     'PORT': '5432',               # Database port (leave blank for default)
     'CONN_MAX_AGE': 300,      # Max database connection age
 }
@@ -23,7 +27,11 @@ DATABASE = {
 # for each. Full connection details are required.
 REDIS = {
     'tasks': {
-        'HOST': '${PRIV_IP}',
+<<<<<<< HEAD
+        'HOST': '10.0.18.29',
+=======
+        'HOST': '10.0.18.29',
+>>>>>>> 7ae6cf6b55e6e1b2647b68774d548985ddd0049e
         'PORT': 6379,
         # Comment out `HOST` and `PORT` lines and uncomment the following if using Redis Sentinel
         # 'SENTINELS': [('mysentinel.redis.example.com', 6379)],
@@ -36,7 +44,11 @@ REDIS = {
         # 'INSECURE_SKIP_TLS_VERIFY': False,
     },
     'caching': {
-        'HOST': '${PRIV_IP}',
+<<<<<<< HEAD
+        'HOST': '10.0.18.29',
+=======
+        'HOST': '10.0.18.29',
+>>>>>>> 7ae6cf6b55e6e1b2647b68774d548985ddd0049e
         'PORT': 6379,
         # Comment out `HOST` and `PORT` lines and uncomment the following if using Redis Sentinel
         # 'SENTINELS': [('mysentinel.redis.example.com', 6379)],
