@@ -17,7 +17,7 @@ services:
   
   db:
     image: postgres:15.2-alpine
-    container_name: postgresql
+    container_name: db
     restart: on-failure
     environment:
       POSTGRES_USER: "statuspage"
@@ -46,7 +46,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      DATABASE_URL: postgres://statuspage:Aa123456123456@postgresql:5432/statuspage
+      DATABASE_URL: db://statuspage:Aa123456123456@db:5432/statuspage
       REDIS_URL: redis://redis:6379/0
 
 volumes:

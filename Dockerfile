@@ -13,8 +13,7 @@ COPY statuspage/statuspage/settings.py ./statuspage/
 COPY . .
 
 # run the upgrade script
-RUN #apt-get update && \
-    bash ./upgrade.sh && \
+RUN bash ./upgrade.sh && \
     python -m venv /venv && \
     python ./statuspage/manage.py createsuperuser --no-input --username superuser
 
