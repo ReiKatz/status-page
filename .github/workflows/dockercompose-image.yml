@@ -1,4 +1,5 @@
 name: Docker Compose Workflow
+
 on:
   push:
     branches: [ main ]
@@ -6,12 +7,34 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  connect:
     runs-on: self-hosted
     defaults:
       run:
         shell: bash
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.PRIVATE_KEY }}
+
+      - name: Connect to CI server via bastion host
+        uses: appleboy/ssh-action@master
+        with:
+          host: 10.0.158.157
+          username: ubuntu
+          port: 22
+          key: ${{ secrets.PRIVATE_KEY }}
+        # passphrase: ${{ secrets.PRIVATE_KEY_PASSPHRASE }}
+          command: cd actions-runner && ./run.cmd
+          proxy_jump: 10.0.0.240
+          proxy_jump_user: ubuntu
+          proxy_jump_port: 22
+          proxy_jump_key: ${{ secrets.PRIVATE_IP }}
+
       # need checkout before using compose-action
       - uses: actions/checkout@v3
       - uses: isbang/compose-action@v1.4.1
