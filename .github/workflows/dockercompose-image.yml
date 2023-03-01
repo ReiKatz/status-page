@@ -1,0 +1,30 @@
+name: Docker Compose Workflow
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Start DB and Redis services
+        uses: isbang/compose-action@v1.4.1
+        with:
+          compose-file: docker-compose.yml
+          compose-command: up -d --no-deps db redis
+      - name: Wait for DB and Redis services to start
+        run: |
+          echo "Waiting for DB and Redis services to start..."
+          sleep 10
+      - name: Build and start app service
+        uses: isbang/compose-action@v1.4.1
+        with:
+          compose-file: docker-compose.yml
+          compose-command: up --build app
