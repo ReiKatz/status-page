@@ -16,13 +16,13 @@ jobs:
       - name: Test on redis
         uses: cloudposse/github-action-docker-compose-test-run@main
         with:
-          file: status-page/docker-compose.yml
+          file: docker-compose.yml
           service: redis
           command: test/unit-tests.sh
 
       - name: Test on db
         uses: cloudposse/github-action-docker-compose-test-run@main
         with:
-          file: status-page/docker-compose.yml
+          file: docker-compose.yml
           service: db
           command: test/unit-tests.sh
