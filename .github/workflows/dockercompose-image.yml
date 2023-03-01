@@ -11,11 +11,6 @@ jobs:
     defaults:
       run:
         shell: bash
-    env:
-      DB_HOST: db
-      DB_PORT: 5432
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
     steps:
       # need checkout before using compose-action
       - uses: actions/checkout@v3
@@ -35,4 +30,3 @@ jobs:
           up-flags: "--build"
           services: |
             app
-
