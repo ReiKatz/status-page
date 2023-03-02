@@ -9,7 +9,7 @@ services:
 #       interval: 5s
 #       timeout: 5s
 #       retries: 5
-#     network_mode: "host"
+      network_mode: "host"
   
   db:
     image: postgres:15.2-alpine
@@ -27,7 +27,7 @@ services:
 #     volumes:
 #       - ./init.sql/db.sql:/docker-entrypoint-initdb.d/init.sql
 #       - ./postgresql.conf:/etc/postgresql/postgresql.conf
-#     network_mode: "host"
+      network_mode: "host"
 
   app:
     build: .
