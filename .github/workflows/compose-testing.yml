@@ -18,18 +18,18 @@ jobs:
         with:
           file: docker-compose.yml
           service: redis
-          command: test/unit-tests.sh
+          command: unit-tests.sh
 
       - name: Test on db
         uses: cloudposse/github-action-docker-compose-test-run@main
         with:
           file: docker-compose.yml
           service: db
-          command: test/unit-tests.sh
+          command: unit-tests.sh
 
       - name: Test on app
         uses: cloudposse/github-action-docker-compose-test-run@main
         with:
           file: docker-compose.yml
           service: app
-          command: test/unit-tests.sh
+          command: unit-tests.sh
