@@ -12,7 +12,7 @@ COPY statuspage/manage.py ./statuspage/
 COPY statuspage/statuspage/settings.py ./statuspage/
 COPY . .
 
-COPY ./unit-testing/test_script.py ./unit-testing/test_script.py
+COPY ./unit-testing/test_script.py .
 RUN chown app:app unit-testing/test_script.py
 RUN chmod +x unit-testing/test_script.py
 
