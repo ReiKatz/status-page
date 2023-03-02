@@ -35,5 +35,5 @@ jobs:
             "--build"
             "-d"
           services: app
-          compose-flags: "pytest ./unit-testing/test_script.py"
+          compose-flags: "./unit-testing/test_script.py"
           down-flags: "--volumes"
