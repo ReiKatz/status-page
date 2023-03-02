@@ -17,9 +17,7 @@ jobs:
         uses: isbang/compose-action@v1.4.1
         with:
           compose-file: "./docker-compose.yml"
-          up-flags: |
-            -d
-            --build
+          up-flags: "--build"
           services: |
             redis
             db
@@ -33,9 +31,7 @@ jobs:
         uses: isbang/compose-action@v1.4.1
         with:
           compose-file: "./docker-compose.yml"
-          up-flags: |
-            --build
-            -d
+          up-flags: "--build"
           services: app
           compose-flags: "./unit-testing/test_script.py"
           down-flags: "--volumes"
