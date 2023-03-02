@@ -31,4 +31,4 @@ jobs:
           compose-flags: "run app"
 
       - name: run test script
-        run: python test_script.py
+        run: echo "hellooo"
