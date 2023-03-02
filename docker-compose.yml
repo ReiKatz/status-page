@@ -42,24 +42,24 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-    healthcheck:
-      test: ["CMD-SHELL", "python -c \"import socket, time; \
-          s = socket.socket(socket.AF_INET, socket.SOCK_STREAM); \
-          time.sleep(5); \
-          while True: \
-            try: \
-              s.connect(('db', 5432)); \
-              s.close(); \
-              s = socket.socket(socket.AF_INET, socket.SOCK_STREAM); \
-              s.connect(('redis', 6379)); \
-              s.close(); \
-              break; \
-            except Exception as e: \
-              print(e); \
-              time.sleep(1)\""]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+#     healthcheck:
+#       test: ["CMD-SHELL", "python -c \"import socket, time; \
+#           s = socket.socket(socket.AF_INET, socket.SOCK_STREAM); \
+#           time.sleep(5); \
+#           while True: \
+#             try: \
+#               s.connect(('db', 5432)); \
+#               s.close(); \
+#               s = socket.socket(socket.AF_INET, socket.SOCK_STREAM); \
+#               s.connect(('redis', 6379)); \
+#               s.close(); \
+#               break; \
+#             except Exception as e: \
+#               print(e); \
+#               time.sleep(1)\""]
+#       interval: 10s
+#       timeout: 5s
+#       retries: 5
 
 volumes:
   db.sql:
