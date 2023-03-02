@@ -21,17 +21,17 @@ jobs:
           services: |
             redis
             db
-          
-      - name: wait for db and redis to become available
-        run: |
-          echo "Waiting for DB and Redis services to start..."
-          sleep 10
-        
-      - name: compose up to app service and test
+      
+      - name: compose up to app service
         uses: isbang/compose-action@v1.4.1
         with:
           compose-file: "./docker-compose.yml"
           up-flags: "--build"
           services: app
-          compose-flags: "run app test_script.py"
+#           compose-flags: "run app test_script.py"
           down-flags: "--volumes"
+          
+      - name: test app
+        run: |
+          sleep 10
+          python ./test_script.py
