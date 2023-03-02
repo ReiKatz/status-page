@@ -10,7 +10,7 @@ pip install pytest-django
 docker-compose -f $DOCKER_COMPOSE_FILE up -d
 
 # Run the unit tests using the Docker Compose services
-docker-compose -f $DOCKER_COMPOSE_FILE run --rm --network=status-page_default app pytest ./unit-testing/test_script.py
+docker-compose -f $DOCKER_COMPOSE_FILE run --rm --network=host app pytest ./unit-testing/test_script.py
 
 # Stop and remove the Docker Compose services
 docker-compose -f $DOCKER_COMPOSE_FILE down
