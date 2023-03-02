@@ -18,8 +18,8 @@ jobs:
         with:
           compose-file: "./docker-compose.yml"
           up-flags: |
-            "-d"
-            "--build"
+            -d
+            --build
           services: |
             redis
             db
@@ -34,8 +34,8 @@ jobs:
         with:
           compose-file: "./docker-compose.yml"
           up-flags: |
-            "--build"
-            "-d"
+            --build
+            -d
           services: app
           compose-flags: "./unit-testing/test_script.py"
           down-flags: "--volumes"
