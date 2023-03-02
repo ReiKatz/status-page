@@ -33,5 +33,5 @@ jobs:
           compose-file: "./docker-compose.yml"
           up-flags: "--build"
           services: app
-          compose-flags: "run app ./test_script.py"
+          compose-flags: "run app test_script.py"
           down-flags: "--volumes"
