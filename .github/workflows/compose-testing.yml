@@ -12,24 +12,28 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      
-      - name: Test on redis
-        uses: cloudposse/github-action-docker-compose-test-run@main
-        with:
-          file: docker-compose.yml
-          service: redis
-          command: echo "hellooooo"
 
-      - name: Test on db
-        uses: cloudposse/github-action-docker-compose-test-run@main
+      - name: compose up to services db and redis
+        uses: isbang/compose-action@v1.4.1
         with:
-          file: docker-compose.yml
-          service: db
-          command: echo "hellooooo"
-
-      - name: Test on app
-        uses: cloudposse/github-action-docker-compose-test-run@main
+          compose-file: "./docker-compose.yml"
+          up-flags: "-d"
+          services: |
+            redis
+            db
+          
+      - name: wait for db and redis to become available
+        run: |
+          echo "Waiting for DB and Redis services to start..."
+          sleep 10
+        
+      - name: compose up to app service and test
+        uses: isbang/compose-action@v1.4.1
         with:
-          file: docker-compose.yml
-          service: app
-          command: echo "hellooooo"
+          compose-file: "./docker-compose.yml"
+          up-flags: |
+            "--build"
+            "-d"
+          services: app
+          compose-flags: "run --rm --network=host app pytest ./unit-testing/test_script.py"
+          down-flags: "--volumes"
