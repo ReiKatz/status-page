@@ -43,9 +43,9 @@ jobs:
       ports:
         - 5432:5432
       env:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: password
-        POSTGRES_DB: test_db
+        POSTGRES_USER: statuspage
+        POSTGRES_PASSWORD: Aa123456123456
+        POSTGRES_DB: statuspage
 
     redis:
       image: redis:latest
