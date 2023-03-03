@@ -10,15 +10,15 @@ services:
 #       timeout: 5s
 #       retries: 5
     network_mode: "host"
-  
+ 
   db:
     image: postgres:15.2-alpine
     container_name: db
     restart: on-failure
     environment:
-      POSTGRES_USER: "statuspage"
-      POSTGRES_PASSWORD: "Aa123456123456"
-      POSTGRES_DB: "statuspage"
+      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      POSTGRES_DB: ${{ secrets.DB_NAME }}
 #     healthcheck:
 #       test: ["CMD-SHELL", "pg_isready -d statuspage -U statuspage"]
 #       interval: 10s
