@@ -17,7 +17,7 @@ services:
     restart: on-failure
     environment:
       POSTGRES_USER: statuspage
-      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      POSTGRES_PASSWORD: Aa123456123456
       POSTGRES_DB: statuspage
 #     healthcheck:
 #       test: ["CMD-SHELL", "pg_isready -d statuspage -U statuspage"]
