@@ -37,21 +37,6 @@ jobs:
  test:
   runs-on: self-hosted
 
-  services:
-    db:
-      image: postgres:latest
-      ports:
-        - 5432:5432
-      env:
-        POSTGRES_USER: statuspage
-        POSTGRES_PASSWORD: Aa123456123456
-        POSTGRES_DB: statuspage
-
-    redis:
-      image: redis:latest
-      ports:
-        - 6379:6379
-
   steps:
     - name: Checkout code
       uses: actions/checkout@v2
