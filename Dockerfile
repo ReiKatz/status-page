@@ -12,10 +12,12 @@ COPY statuspage/manage.py ./statuspage/
 COPY statuspage/statuspage/settings.py ./statuspage/
 COPY . .
 
+RUN 
+
 # run the upgrade script
 RUN bash ./upgrade.sh && \
     python3 -m venv /venv && \
-    python3 ./statuspage/manage.py createsuperuser --no-input --email superuser@email.com --user superuser1
+    python3 ./statuspage/manage.py createsuperuser --no-input --email superuser@email.com --user user2
 
 EXPOSE 8000
 
