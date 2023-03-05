@@ -33,6 +33,17 @@ jobs:
           up-flags: "--build"
           services: |
             app
+            
+#   test:
+#     runs-on: self-hosted
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       - name: Run Tests
+#         run: |
+#           chmod +x tests/check-http-request.sh
+#           ./tests/check-http-request.sh
     
 #       - name: Configure AWS credentials
 #         uses: aws-actions/configure-aws-credentials@v1
