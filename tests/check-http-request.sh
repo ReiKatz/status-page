@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PORT=8000
+PORT=80
 ALB_DNS_NAME=finalproject-alb-2143497004.eu-west-1.elb.amazonaws.com/
 
 # Make an HTTP request to the application through the ALB
