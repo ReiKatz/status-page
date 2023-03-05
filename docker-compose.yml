@@ -4,11 +4,11 @@ services:
     image: redis:7.0.8-alpine
     container_name: redis
     restart: on-failure
-#     healthcheck:
-#       test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
-#       interval: 5s
-#       timeout: 5s
-#       retries: 5
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     network_mode: "host"
  
   db:
@@ -17,17 +17,16 @@ services:
     restart: on-failure
     environment:
       POSTGRES_USER: statuspage
-      POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      POSTGRES_PASSWORD: Aa123456123456
       POSTGRES_DB: statuspage
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-#     healthcheck:
-#       test: ["CMD-SHELL", "pg_isready -d statuspage -U statuspage"]
-#       interval: 10s
-#       timeout: 5s
-#       retries: 5
-#     volumes:
-#       - ./init.sql/db.sql:/docker-entrypoint-initdb.d/init.sql
-#       - ./postgresql.conf:/etc/postgresql/postgresql.conf
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d statuspage -U statuspage"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./init.sql/db.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
     network_mode: "host"
 
   app:
