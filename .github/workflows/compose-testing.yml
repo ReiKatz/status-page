@@ -1,0 +1,61 @@
+name: docker compose tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# jobs:
+#   test:
+#     runs-on: self-hosted
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+
+#       - name: compose up to services db and redis
+#         uses: isbang/compose-action@v1.4.1
+#         with:
+#           compose-file: "./docker-compose.yml"
+#           up-flags: "--build"
+#           services: |
+#             redis
+#             db
+      
+#       - name: compose up to app service and test
+#         uses: isbang/compose-action@v1.4.1
+#         with:
+#           compose-file: "./docker-compose.yml"
+#           up-flags: "--build"
+#           services: app
+#           compose-flags: "run app"
+
+#       - name: run test script
+#         run: echo "hellooo"
+
+jobs:
+ test:
+  runs-on: self-hosted
+
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python Environment
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.10'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+  
+    - name: Set up Database
+      run: |
+        python ./statuspage/manage.py migrate --noinput
+        python ./statuspage/manage.py makemigrations --check --dry-run || exit 1
+
+    - name: Run Tests
+      run: |
+        python ./statuspage/manage.py test

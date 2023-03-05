@@ -22,4 +22,4 @@ RUN bash ./upgrade.sh && \
 EXPOSE 8000
 
 # Start the Django application
-CMD ["python3", "./statuspage/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python3", "./statuspage/manage.py", "runserver", "0.0.0.0:8000", "--insecure"]
