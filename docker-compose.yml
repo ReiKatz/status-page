@@ -17,7 +17,7 @@ services:
     restart: on-failure
     environment:
       POSTGRES_USER: statuspage
-      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: statuspage
 #     healthcheck:
 #       test: ["CMD-SHELL", "pg_isready -d statuspage -U statuspage"]
