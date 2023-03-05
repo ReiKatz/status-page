@@ -1,4 +1,4 @@
-name: Docker Compose Build and push
+name: Build, test and push
 on:
   push:
     branches: [ main ]
