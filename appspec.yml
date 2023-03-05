@@ -1,0 +1,10 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/status-page
+hooks:
+  ApplicationStart:
+    - location: scripts/application_start.sh
+      timeout: 180
+      runas: ubuntu
