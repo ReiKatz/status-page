@@ -35,7 +35,7 @@ services:
     restart: on-failure
     network_mode: "host"
     environment:
-      DATABASE_URL: postgresql://statuspage:${{ secrets.DB_PASSWORD }}@localhost:5432/statuspage
+      DATABASE_URL: postgresql://statuspage:Aa123456123456@localhost:5432/statuspage
       REDIS_URL: redis://localhost:6379/0
 #     depends_on:
 #       db:
