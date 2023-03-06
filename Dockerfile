@@ -19,7 +19,7 @@ COPY . .
 # run the upgrade script
 RUN bash ./upgrade.sh && \
     python3 -m venv /venv && \
-    python3 ./statuspage/manage.py createsuperuser --no-input --email superuser@email.com --user user2
+    python3 ./statuspage/manage.py createsuperuser --no-input --email superuser@email.com --user user22
 
 EXPOSE 8000 5432 6379
 
