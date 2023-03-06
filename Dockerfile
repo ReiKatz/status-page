@@ -12,8 +12,6 @@ COPY statuspage/manage.py ./statuspage/
 COPY statuspage/statuspage/settings.py ./statuspage/
 COPY . .
 
-RUN 
-
 # run the upgrade script
 RUN bash ./upgrade.sh && \
     python3 -m venv /venv && \
