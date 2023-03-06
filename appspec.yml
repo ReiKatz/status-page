@@ -7,9 +7,9 @@ hooks:
   BeforeInstall:
     - location: scripts/install_codedeploy_agent.sh
       timeout: 300
-      runas: ubuntu
+      runas: root
   
   ApplicationStart:
     - location: scripts/application_start.sh
       timeout: 180
-      runas: ubuntu
+      runas: root
