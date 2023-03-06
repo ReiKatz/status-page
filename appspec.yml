@@ -4,13 +4,10 @@ files:
   - source: /
     destination: /home/ubuntu/status-page
 hooks:
-  BeforeInstall:
-#     - location: scripts/install_codedeploy_agent.sh
+#   BeforeInstall:
+#     - location: ./scripts/before_installation.sh
 #       timeout: 300
 #       runas: root
-    - location: ./scripts/setup_db_redis.sh
-      timeout: 300
-      runas: root
   
   ApplicationStart:
     - location: ./scripts/application_start.sh
