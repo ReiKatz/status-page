@@ -4,10 +4,10 @@ files:
   - source: /
     destination: /home/ubuntu/status-page
 hooks:
-#   BeforeInstall:
-#     - location: ./scripts/before_installation.sh
-#       timeout: 300
-#       runas: root
+  BeforeInstall:
+    - location: ./scripts/before_installation.sh
+      timeout: 300
+      runas: root
   
   ApplicationStart:
     - location: ./scripts/application_start.sh
