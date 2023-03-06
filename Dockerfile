@@ -7,7 +7,10 @@ WORKDIR /status-page
 # Install dependencies
 RUN apt-get update && \
     apt-get install -y libxml2-dev libxslt1-dev libffi-dev libpq-dev libssl-dev zlib1g-dev
-
+    
+# Install sql and redis
+RUN apt-get update && apt-get install -y postgresql-client
+RUN apt-get install -y redis-tools
 # Install any needed packages specified in requirements.txt
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
