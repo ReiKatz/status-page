@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 cd /home/ubuntu/status-page             # change to the status-page directory
-sudo docker-compose pull                # pull the latest images from the registry
-sudo docker-compose down                # stop and remove any existing containers
-sudo docker-compose up --build -d app   # start app container
+
+aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 639771291841.dkr.ecr.eu-west-1.amazonaws.com #login to ECR
+docker pull 639771291841.dkr.ecr.eu-west-1.amazonaws.com/status-page:latest
+sudo docker run -d -p 8000:8000 --name appcontainer 639771291841.dkr.ecr.eu-west-1.amazonaws.com/status-page:latest
