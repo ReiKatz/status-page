@@ -8,11 +8,11 @@ hooks:
 #     - location: scripts/install_codedeploy_agent.sh
 #       timeout: 300
 #       runas: root
-    - location: scripts/setup_db_redis.sh
+    - location: ./scripts/setup_db_redis.sh
       timeout: 300
       runas: root
   
   ApplicationStart:
-    - location: scripts/application_start.sh
+    - location: ./scripts/application_start.sh
       timeout: 300
       runas: root
