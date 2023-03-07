@@ -27,7 +27,11 @@ COPY . .
     
 RUN bash ./upgrade.sh && \
     python3 -m venv /venv && \
-    python3 ./statuspage/manage.py createsuperuser --no-input --email superuser@email.com --user superuserr --password Aa123456123456
+    python3 ./statuspage/manage.py createsuperuser --no-input --email superuser@email.com --username superuserr && \
+    echo "from django.contrib.auth.models import User; \
+    user = User.objects.get(username='superuserr'); \
+    user.set_password('Aa123456123456'); \
+    user.save()" | python3 ./statuspage/manage.py shell
     
 EXPOSE 8000 5432 6379
 
