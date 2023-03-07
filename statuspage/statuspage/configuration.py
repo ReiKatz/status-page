@@ -1,7 +1,8 @@
-import requests
+import os
+#import requests
 
 # Get the private IP address of the instance using the AWS metadata service
-private_ip_address = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4').text
+# private_ip_address = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4').text
 
 # Required Settings
 #
@@ -17,7 +18,7 @@ ALLOWED_HOSTS = ['*']
 DATABASE = {
     'NAME': 'statuspage',         # Database name
     'USER': 'statuspage',               # PostgreSQL username
-    'PASSWORD': 'Aa123456123456',           # PostgreSQL password
+    'PASSWORD': os.environ.get('DB_PASSWORD'),           # PostgreSQL password
     'HOST': 'statuspage-instance-1.cgw20yat8vpw.eu-west-1.rds.amazonaws.com',      # Database server
     'PORT': '5432',               # Database port (leave blank for default)
     'CONN_MAX_AGE': 300,      # Max database connection age
