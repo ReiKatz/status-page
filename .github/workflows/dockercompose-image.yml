@@ -57,6 +57,6 @@ jobs:
           aws deploy create-deployment \
             --application-name CICD \
             --deployment-group-name CICDGROUP \
-            --revision file://status-page/appspec.yml \
+            --revision gitHubLocation=status-page/tree/main/appspec.yml \
             --description "Deployment initiated by GitHub Actions" \
             --file-exists-behavior OVERWRITE
