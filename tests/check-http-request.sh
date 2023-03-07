@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PORT=80
-ALB_DNS_NAME=LBPAGE-1209324501.eu-west-1.elb.amazonaws.com
+ALB_DNS_NAME=63.33.211.57
 
 # Make an HTTP request to the application through the ALB
 RESPONSE=$(curl -v -w '%{http_code}' http://$ALB_DNS_NAME:$PORT/ -o /dev/null)
