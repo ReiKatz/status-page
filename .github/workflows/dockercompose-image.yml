@@ -1,4 +1,4 @@
-name: Build, test and push
+name: Build, test, push and deploy
 on:
   push:
     branches: [ main ]
@@ -26,23 +26,6 @@ jobs:
     steps:
       # need checkout before using compose-action
       - uses: actions/checkout@v3
-#       - uses: isbang/compose-action@v1.4.1
-#         with:
-#           compose-file: "./docker-compose.yml"
-#           services: |
-#             redis
-#             db
-#       - name: Wait for DB and Redis services to start
-#         run: |
-#           echo "Waiting for DB and Redis services to start..."
-#           sleep 10
-#       - uses: isbang/compose-action@v1.4.1    
-#         with:
-#           compose-file: docker-compose.yml
-#           up-flags: "--build"
-#           services: |
-#             app
-            
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -62,3 +45,13 @@ jobs:
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG  
+          
+      - name: Start CodeDeploy Deployment
+        id: start_deploy
+        run: |
+          aws deploy create-deployment \
+            --application-name CICD \
+            --deployment-group-name CICDGROUP \
+            --revision revisionType=ECR,imageName=status-page:latest \
+            --description "Deployment initiated by GitHub Actions" \
+            --file-exists-behavior OVERWRITE
