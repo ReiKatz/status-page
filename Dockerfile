@@ -22,7 +22,7 @@ COPY . .
 # run the upgrade script
 RUN bash ./upgrade.sh && \
     python3 -m venv /venv && \
-    python3 -c 'import os; from django.core.wsgi import get_wsgi_application; os.environ.setdefault("DJANGO_SETTINGS_MODULE", "statuspage.settings"); get_wsgi_application().apps.populate(settings.INSTALLED_APPS); from django.contrib.auth.models import User; User.objects.create_superuser("user3", email="superuser@email.com")'
+    python3 -c 'import os; from django.core.wsgi import get_wsgi_application; os.environ.setdefault("DJANGO_SETTINGS_MODULE", "statuspage.settings"); get_wsgi_application().apps.populate(settings.INSTALLED_APPS); from django.contrib.auth.models import User; u, created = User.objects.get_or_create(username="user3", email="superuser@email.com"); u.is_superuser=True; u.set_unusable_password(); u.save()'
 
 EXPOSE 8000 5432 6379
 
