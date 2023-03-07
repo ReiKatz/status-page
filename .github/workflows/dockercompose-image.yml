@@ -57,6 +57,6 @@ jobs:
           aws deploy create-deployment \
             --application-name CICD \
             --deployment-group-name CICDGROUP \
-            --revision revisionType=ECR,imageName=status-page:latest \
+            --revision revisionType=ECR,imageUri=639771291841.dkr.ecr.eu-west-1.amazonaws.com/status-page:latest \
             --description "Deployment initiated by GitHub Actions" \
             --file-exists-behavior OVERWRITE
