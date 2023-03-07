@@ -6,17 +6,6 @@ on:
     branches: [ main ]
 
 jobs:
-        
-  test:
-    runs-on: self-hosted
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Run Tests
-        run: |
-          chmod +x tests/check-http-request.sh
-          ./tests/check-http-request.sh
           
   build_push:
     runs-on: self-hosted
@@ -60,6 +49,11 @@ jobs:
             --deployment-config-name CodeDeployDefault.OneAtATime \
             --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
 
+      - name: Run Tests
+        run: |
+          chmod +x tests/check-http-request.sh
+          ./tests/check-http-request.sh
+      
       - name: Create CodeDeploy Deployment
         id: deploy
         run: |
@@ -68,3 +62,5 @@ jobs:
             --deployment-group-name CICDGROUP \
             --deployment-config-name CodeDeployDefault.OneAtATime \
             --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
+
+       
