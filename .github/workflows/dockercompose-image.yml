@@ -50,17 +50,16 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y awscli ruby
-          
-#       - name: Start CodeDeploy Deployment
-#         id: start_deploy
-#         run: |
-#           aws deploy create-deployment \
-#             --application-name CICD \
-#             --deployment-group-name CICDGROUP \
-#             --revision gitHubLocation={"repository":"status-page","commitId":"main","filePath":"appspec.yml"} \
-#             --description "Deployment initiated by GitHub Actions" \
-#             --file-exists-behavior OVERWRITE
-            
+   
+      - name: Create CodeDeploy Deployment
+        id: deploy-test
+        run: |
+          aws deploy create-deployment \
+            --application-name CICD \
+            --deployment-group-name CICDTESTGROUP \
+            --deployment-config-name CodeDeployDefault.OneAtATime \
+            --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
+
       - name: Create CodeDeploy Deployment
         id: deploy
         run: |
