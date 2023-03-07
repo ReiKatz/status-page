@@ -20,19 +20,11 @@ COPY statuspage/statuspage/settings.py ./statuspage/
 COPY . .
 
 # run the upgrade script
-# RUN bash ./upgrade.sh && \
-#     python3 -m venv /venv && \
-#     USERNAME=$(python -c 'import uuid; print(uuid.uuid4().hex[:8])') && \
-#     python3 ./statuspage/manage.py createsuperuser --no-input --email superuser@email.com --user $USERNAME
-    
 RUN bash ./upgrade.sh && \
     python3 -m venv /venv && \
-    python3 ./statuspage/manage.py createsuperuser --no-input --email superuser@email.com --username superuserr && \
-    echo "from django.contrib.auth.models import User; \
-    user = User.objects.get(username='superuserr'); \
-    user.set_password('Aa123456123456'); \
-    user.save()" | python3 ./statuspage/manage.py shell
-    
+    USERNAME=$(python -c 'import uuid; print(uuid.uuid4().hex[:8])') && \
+    python3 ./statuspage/manage.py createsuperuser --no-input --email superuser@email.com --user $USERNAME
+        
 EXPOSE 8000 5432 6379
 
 # Start the Django application
