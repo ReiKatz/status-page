@@ -20,10 +20,14 @@ COPY statuspage/statuspage/settings.py ./statuspage/
 COPY . .
 
 # run the upgrade script
+# RUN bash ./upgrade.sh && \
+#     python3 -m venv /venv && \
+#     USERNAME=$(python -c 'import uuid; print(uuid.uuid4().hex[:8])') && \
+#     python3 ./statuspage/manage.py createsuperuser --no-input --email superuser@email.com --user $USERNAME
+    
 RUN bash ./upgrade.sh && \
     python3 -m venv /venv && \
-    USERNAME=$(python -c 'import uuid; print(uuid.uuid4().hex[:8])') && \
-    python3 ./statuspage/manage.py createsuperuser --no-input --email superuser@email.com --user $USERNAME
+    python3 ./statuspage/manage.py createsuperuser --no-input --email superuser@email.com --user superuserr --password Aa123456123456
     
 EXPOSE 8000 5432 6379
 
