@@ -1,20 +1,16 @@
-import os
-#import requests
+# import os
 
-# Get the private IP address of the instance using the AWS metadata service
-# private_ip_address = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4').text
-
-# Required Settings
-#
 
 # This is a list of valid fully-qualified domain names (FQDNs) for the Status-Page server. Status-Page will not permit
 # write access to the server via any other hostnames. The first FQDN in the list will be treated as the preferred name.
 #
 # Example: ALLOWED_HOSTS = ['status-page.example.com', 'status-page.internal.local']
+
 ALLOWED_HOSTS = ['*']
 
 # PostgreSQL database configuration. See the Django documentation for a complete list of available parameters:
 #   https://docs.djangoproject.com/en/stable/ref/settings/#databases
+
 DATABASE = {
     'NAME': 'statuspage',         # Database name
     'USER': 'statuspage',               # PostgreSQL username
