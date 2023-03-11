@@ -1,59 +1,26 @@
-<div align="center">
-    <img alt="Status Page" src="https://cdn.herrtxbias.net/status-page/logo_gray/logo_small.png"></a>
-</div>
-<br />
-<p align="center">
-    <a href="https://github.com/Status-Page/Status-Page"><img alt="GitHub license" src="https://img.shields.io/github/license/Status-Page/Status-Page"></a>
-    <a href="https://github.com/Status-Page/Status-Page/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/Status-Page/Status-Page"></a>
-    <a href="https://github.com/Status-Page/Status-Page/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/Status-Page/Status-Page"></a>
-    <a href="https://github.com/Status-Page/Status-Page/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/Status-Page/Status-Page"></a>
-    <a href="https://github.com/Status-Page/Status-Page/releases"><img alt="GitHub latest releas" src="https://img.shields.io/github/release/Status-Page/Status-Page"></a>
-    <a href="https://www.codacy.com/gh/Status-Page/Status-Page/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Status-Page/Status-Page&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/250b53ad99ca432cbac8d761a975b34d"/></a>
-</p>
+### (This README file is still in the making)
 
-# Overview
-- Components
-- Report incidents
-- JSON API
-- Metrics
-- Two Factor Authentication
-- Markdown support in incident / maintenance messages
-- Subscriptions for Notifications
-- Custom Plugins
+# *Bootcamp Final Project: Building and Deploying Cloud-Based Application on AWS Architecture with Efficient CI/CD Pipelines.*
+**(The source code for the application originates from the following GitHub repository: https://github.com/status-page/status-page).**
 
-# Requirements
-| Dependency       | Minimum Version | Optional |
-|------------------|-----------------|----------|
-| Python           | 3.10            | no       |
-| PostgreSQL       | 10              | no       |
-| Redis            | 4.0             | no       |
-| SMTP Mail Server | ---             | yes      |
+Our project had three primary objectives in mind, which were to prioritize:
+- efficiency
+- cost-effectiveness
+- high availability and scalability
 
-# Installation & Updates
-Please have a look at our [Documentation](https://docs.status-page.dev/).
+#### The architecture we built on AWS looks like this:
+![arch](https://user-images.githubusercontent.com/117725271/224322465-470708e5-7b32-4497-b987-f4a9099d25e5.png)
 
-## Versioning
-We use semantic versioning. A version number has the following structure:
-````
-v 1 . 0 . 0
-  ^   ^   ^
-  |   |   |
-  |   |   Patch (Bug fixes)
-  |   |
-  |   Minor (No breaking changes to the Software, e.g. adding new features)
-  |
-  Major (Breaking changes to the Software)
-````
+#### Security:
+- We separated the database, application, and public subnets, and placed the application servers in private subnets that were only reachable through a bastion host. This enhanced the overall security posture of the system and reduced the attack surface.
+- we implemented specific security rules for each type of instance in order to isolate them and minimize the chances of opening unnecessary ports. This further increased the security of the architecture and helped to mitigate potential threats.
+- To further strengthen our security measures, we implemented a Web Application Firewall (WAF) with our load balancer. The WAF provided protection against SQL injection attacks and anonymous connections to our application (such as VPN), while also defending against bot attacks. Additionally, we incorporated a CAPTCHA feature to make our system even more resistant to unauthorized access attempts. 
 
-## Documentation
-You can find the Documentation [here](https://docs.status-page.dev/).
+- Due to time constraints and a deadline, we made some compromises with regards to the security of our CI and test servers. Specifically, we were not able to fully isolate the test environment and had to place the test and CI server in public subnets.
 
-## Other Licenses and Acknowledgements
-### Tailwind UI
-We are using Tailwind UI Components in this App. You are **NOT** allowed to reuse these Components in your own App!
+#### Availability:
+- To ensure maximum availability of our system, we have adopted a multi-AZ deployment approach. This approach involves replicating our infrastructure across multiple Availability Zones (AZs) in a given region, providing resiliency and redundancy in the event of a single AZ failure.
+- In order to distribute traffic evenly across various instances running in our two Availability Zones (AZs), we implemented an Application Load Balancer (ALB). It allowed us to effectively manage traffic, ensure high availability, and optimize performance by routing requests to the most appropriate target instances.
 
-See their [License](https://www.notion.so/Tailwind-UI-License-644418bb34ad4fa29aac9b82e956a867) for more information.
-
-### NetBox
-As you may have noticed, the base structure for many parts of the app is derived
-from [NetBox](https://github.com/netbox-community/netbox), this made development much easier.
+#### Scalability:
+- By deploying our application in an Auto Scaling Group, we gained the benefits of flexibility and scalability as needed. The ASG allowed us to automatically adjust the number of instances running our application in response to changes in demand, ensuring that we could meet our performance and capacity requirements at all times. Additionally, the ASG ensured that we had a reliable and fault-tolerant architecture, by automatically replacing unhealthy instances.
