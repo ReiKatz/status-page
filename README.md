@@ -29,7 +29,7 @@ Our project had three primary objectives in mind, which were to prioritize:
 - In total of all our infrastructure working, it will cost ~200$ a month 
 
 
-*Documentation:*
+# *Documentation:*
 - In this project we have gotten through some changes with our architecture which has been changed in the last 2 days of the project deadline that includes as can be seen in this repo- the docker compose. From the very first start we thought its better to create all our DB, redis and the app itself in one docker compose that will create 3 containers (due to thinking of making the project more simple with less infrastructure and cheaper) which indeed did work but that architecture is working the best for testing environment and not a production environment (as in if we have several servers that run the status page app- what will happen to our changes in DB if its in containers in docker compose and not in some type of RDS- which won't fit for production), so we have decided to change that and use RDS postgres and elastic cache for redis so the docker compose wasn't relevant anymore only the Dockerfile to build our app- it's indeed making the costs more expensive (mostly from the RDS) but now this project is much more compatible for production and for users using it.
 So we can conclude that with the docker compose way of working, it fits more for our test environment and the RDS + elastic cache in exchange of the docker compose fits more for our production environment- by understanding that we can have two environment seperated by two VPCs for best practice and use each one for their own usage- one for the developers and one for our users.
 - Our CI/CD is built through github actions and we have our own runner server:
