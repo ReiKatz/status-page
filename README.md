@@ -1,4 +1,4 @@
-### (This README file is still in the making)
+### (This README file is still in progress)
 
 # *Bootcamp Final Project: Building and Deploying Cloud-Based Application on AWS Architecture with Efficient CI/CD Pipelines.*
 **(The source code for the application originates from the following GitHub repository: https://github.com/status-page/status-page).**
@@ -24,3 +24,12 @@ Our project had three primary objectives in mind, which were to prioritize:
 
 #### Scalability:
 - By deploying our application in an Auto Scaling Group, we gained the benefits of flexibility and scalability as needed. The ASG allowed us to automatically adjust the number of instances running our application in response to changes in demand, ensuring that we could meet our performance and capacity requirements at all times. Additionally, the ASG ensured that we had a reliable and fault-tolerant architecture, by automatically replacing unhealthy instances.
+
+#### Cost-effectiveness:
+- In total of all our infrastructure working, it will cost ~200$ a month 
+
+#### Documentation:
+- In this project we have gotten through some changes with our arcitecture which has been changed in the last 2 days of the project deadline that includes as can be seen in this repo- the docker compose. From the very first start we thought its better to create all our DB, redis and the app itself in one docker compose that will create 3 containers (due to thinking of making the project more simple with less infrastrucutre and cheaper) which indeed did work but that arcitecture is working the best for testing and not a production enviroment (as in if we have several servers that run the status page app- what will happen to our changes in DB if its in containers in docker compose and not in some type of RDS), so we have decided to change that and use RDS postgres and elastic cache for redis so the docker compose wasnt relevant anymore only the Dockerfile to build our app- it's indeed making the costs go up (mostly from the RDS) but now this project is much more compatible for production and for users using it.
+So we can conclude that with the docker compose working, it fits more for our test environment and the RDS + elastic cache in excahnge of the docker compose fits more for our production environment- by understanding that we can have two environment seperated by VPC for best practice and use each one for their usage- one for the developers and one for our clients.
+- Our CI/CD is built through github actions and we have our own runner server:
+
