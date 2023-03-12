@@ -42,4 +42,5 @@ Afterwards the latest image is going through code deploy- which will deploy the 
 
 
 - We have learned a lot from this project and used many platforms and more new ones for us like the github actions that led us to understand it better. We went through a lot of trails and errors but we think that's how you learn the best from- we had a moto throughout the project "make it work then make it better" which helped us a lot and I think I will keep it to every place I would go to because it helps you see that the most important thing is to make the very first base of something to work and from there you can add features and updates. We saw that our architecture could change up (very flexiable) with changes (for example the drastic change from docker compose to the RDS and elastic cache) which showed up to work very well, and at the end creating our first ever full big project. We are aware that it is not a perfect project and we can add more stuff for it, such as we should have considered some type of Iac like terraform from the start so we could create all our infrastructure in one go no matter the situation and easier to change in but we learned from our path of that project and know how to work better on future projects.
-*Thank you for your time
+
+*Thank you for your time*
